@@ -1,30 +1,62 @@
-const board = [
-	["A", "B", "C"],
-	["D", "E", "F"],
-	["G", "H", "I"],
+const boardfn: string[][] = [
+  ["A", "B", "C"],
+  ["D", "E", "F"],
+  ["G", "H", "I"],
 ];
 
-const moves = [];
+const rowLength = boardfn.length;
+const colLength = boardfn[0]!.length;
 
-// Start at A (0,0) -> [row][col]
-let row = 0;
-let col = 0;
-moves.push(board[row][col]); // A
+const movefn: string[] = [];
 
-// Define movement functions
-function moveRight() {}
+// Start at A (0,0)
+let rowfn = 0;
+let colfn = 0;
 
-function moveLeft() {}
+movefn.push(boardfn[rowfn]![colfn]!);
 
-function moveUp() {}
+// Movement functions
+function moveRight() {
+  if (colfn < colLength - 1) {
+    colfn++;
+    movefn.push(boardfn[rowfn]![colfn]!);
+  } else {
+    console.log("Invalid move");
+  }
+}
 
-function moveDown() {}
+function moveLeft() {
+  if (colfn > 0) {
+    colfn--;
+    movefn.push(boardfn[rowfn]![colfn]!);
+  } else {
+    console.log("Invalid move");
+  }
+}
 
-// Call the movement functions
-moveRight(); // Move from A to B
-moveRight(); // Move from B to C
-moveDown(); // Move from C to F
-moveLeft(); // Move from F to E
+function moveUp() {
+  if (rowfn > 0) {
+    rowfn--;
+    movefn.push(boardfn[rowfn]![colfn]!);
+  } else {
+    console.log("Invalid move");
+  }
+}
 
-console.log("Path:", moves.join(" → "));
-console.log("Total Moves (Start from 'A'):", moves.length - 1);
+function moveDown() {
+  if (rowfn < rowLength - 1) {
+    rowfn++;
+    movefn.push(boardfn[rowfn]![colfn]!);
+  } else {
+    console.log("Invalid move");
+  }
+}
+
+// Call moves
+moveRight();
+moveRight();
+moveDown();
+moveLeft();
+
+console.log("Path:", movefn.join(" → "));
+console.log("Total Moves (Start from 'A'):", movefn.length - 1);
